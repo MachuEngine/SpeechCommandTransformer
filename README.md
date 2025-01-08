@@ -14,10 +14,19 @@ This repository provides an example implementation of a Transformer-based speech
 - [torchaudio](https://pytorch.org/audio/stable/index.html)
 
 ## ✅ Installation
+
+### Repository Clone
+
+```bash
+git clone https://github.com/MachuEngine/SpeechCommandTransformer.git
+```
+### Required Packages
+
 Install the required packages:
 ```bash
-pip install torch torchaudio
+pip install -r requirements.txt
 ```
+
 
 ## 📰 Usage
 1. Clone the repository and navigate to the project directory.
@@ -38,6 +47,29 @@ The Transformer-based model processes Mel-spectrogram features through the follo
 - **Input Projection**: Projects input features to the desired model dimension.
 - **Transformer Encoder**: Stacks multiple encoder layers to learn complex feature representations.
 - **Classifier**: Maps the encoded features to class logits for classification.
+
+```py
+class SpeechTransformer(nn.Module):
+    def __init__(self, input_dim, num_classes, d_model=128, nhead=8, num_layers=4, dim_feedforward=512, dropout=0.1):
+        super(SpeechTransformer, self).__init__()
+        self.input_projection = nn.Linear(input_dim, d_model)
+        encoder_layer = nn.TransformerEncoderLayer(
+            d_model=d_model, 
+            nhead=nhead, 
+            dim_feedforward=dim_feedforward, 
+            dropout=dropout
+        )
+        self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=num_layers)
+        self.classifier = nn.Linear(d_model, num_classes)
+        
+    def forward(self, x):
+        out = self.input_projection(x) 
+        out = out.transpose(0, 1) 
+        out = self.transformer_encoder(out) 
+        out = out.mean(dim=0) 
+        logits = self.classifier(out) 
+        return logits
+```
 
 ### 3. Training Pipeline
 - **Data Preprocessing**: Converts audio waveforms to Mel-spectrograms, averages across channels, transposes dimensions, and pads sequences to form batches.
