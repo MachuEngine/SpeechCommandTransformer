@@ -1,32 +1,32 @@
-# Speech Command Recognition with Transformer
+# 📊 Speech Command Recognition with Transformer
 
 This repository provides an example implementation of a Transformer-based speech command recognition model using PyTorch and torchaudio. It covers the complete pipeline to download, preprocess the Speech Commands dataset, train a Transformer model, and evaluate its performance.
 
-## Key Features
+## 🚀 Key Features
 - **Dataset Loading**: Implements a custom `SubsetSC` class that extends `torchaudio.datasets.SPEECHCOMMANDS` to selectively load training, validation, or testing subsets.
 - **Feature Extraction**: Converts raw audio signals into Mel-spectrograms to use as input features.
 - **Model Architecture**: Implements a `SpeechTransformer` model using a Transformer Encoder for speech command classification.
 - **Training & Evaluation**: Trains the model for 10 epochs and achieves approximately 80% accuracy on the test set.
 
-## Requirements
+## ✅ Requirements
 - Python 3.6+
 - [PyTorch](https://pytorch.org/)
 - [torchaudio](https://pytorch.org/audio/stable/index.html)
 
-## Installation
+## ✅ Installation
 Install the required packages:
 ```bash
 pip install torch torchaudio
 ```
 
-## Usage
+## 📰 Usage
 1. Clone the repository and navigate to the project directory.
 2. Run the script to start training and evaluation:
 python main.py
 
 The script will automatically download the Speech Commands dataset, start model training, and then evaluate the model on the test set.
 
-## Code Overview
+## ✨ Code Overview
 
 ### 1. Dataset Class: `SubsetSC`
 The `SubsetSC` class extends the `SPEECHCOMMANDS` dataset to selectively load subsets of the data:
@@ -47,7 +47,7 @@ The Transformer-based model processes Mel-spectrogram features through the follo
 ### 4. Evaluation
 The `evaluate` function calculates model accuracy on the test set.
 
-## Training and Evaluation Results
+## ⚛️ Training and Evaluation Results
 
 The loss progression over epochs during training:
 
