@@ -1,17 +1,17 @@
 # 🗞️ attention is all you need 
 [Attention is all you need](https://arxiv.org/abs/1706.03762)
 
-"Attention Is All You Need" (2017) introduces the Transformer model, a neural network architecture that replaces recurrent layers with self-attention mechanisms, significantly improving performance in natural language processing (NLP) tasks.
-Key Points:
-Self-Attention Mechanism – The model processes input sequences in parallel, using scaled dot-product attention to capture dependencies across words regardless of their distance.   
-Multi-Head Attention – Multiple attention mechanisms run in parallel, allowing the model to focus on different parts of the input simultaneously.   
-Positional Encoding – Since Transformers lack recurrence, they use positional encodings to maintain word order information.   
-Encoder-Decoder Structure – The model consists of:   
-Encoder: Processes input sequences using stacked self-attention and feed-forward layers.   
-Decoder: Generates output sequences using self-attention, encoder-decoder attention, and feed-forward layers.   
-Improved Efficiency – Unlike RNNs, which process sequences sequentially, Transformers use parallelization, leading to faster training and better scalability.   
-Breakthrough in NLP – The Transformer significantly outperforms previous models in machine translation and becomes the foundation for models like BERT, GPT, and T5.   
-The paper revolutionized deep learning, making self-attention the dominant paradigm in NLP and beyond.   
+"Attention Is All You Need" (2017) introduces the Transformer model, a neural network architecture that replaces recurrent layers with self-attention mechanisms, significantly improving performance in natural language processing (NLP) tasks.   
+
+* Self-Attention Mechanism – The model processes input sequences in parallel, using scaled dot-product attention to capture dependencies across words regardless of their distance.
+   
+* Multi-Head Attention – Multiple attention mechanisms run in parallel, allowing the model to focus on different parts of the input simultaneously.   
+* Positional Encoding – Since Transformers lack recurrence, they use positional encodings to maintain word order information.   
+* Encoder-Decoder Structure – The model consists of:   
+* Encoder: Processes input sequences using stacked self-attention and feed-forward layers.   
+* Decoder: Generates output sequences using self-attention, encoder-decoder attention, and feed-forward layers.   
+* Improved Efficiency – Unlike RNNs, which process sequences sequentially, Transformers use parallelization, leading to faster training and better scalability.   
+* Breakthrough in NLP – The Transformer significantly outperforms previous models in machine translation and becomes the foundation for models like BERT, GPT, and T5.     
 ---
 # Project
 
