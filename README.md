@@ -1,17 +1,30 @@
-# 🗞️ attention is all you need 
+# 🗞️ attention is all you need - Review
 [Attention is all you need](https://arxiv.org/abs/1706.03762)
 
 "Attention Is All You Need" (2017) introduces the Transformer model, a neural network architecture that replaces recurrent layers with self-attention mechanisms, significantly improving performance in natural language processing (NLP) tasks.   
 
 * Self-Attention Mechanism – The model processes input sequences in parallel, using scaled dot-product attention to capture dependencies across words regardless of their distance.
-   
+
+
 * Multi-Head Attention – Multiple attention mechanisms run in parallel, allowing the model to focus on different parts of the input simultaneously.   
+
+
+
 * Positional Encoding – Since Transformers lack recurrence, they use positional encodings to maintain word order information.   
-* Encoder-Decoder Structure – The model consists of:   
-* Encoder: Processes input sequences using stacked self-attention and feed-forward layers.   
-* Decoder: Generates output sequences using self-attention, encoder-decoder attention, and feed-forward layers.   
+
+
+
+* Encoder-Decoder Structure – 
+    The model consists of:   
+        Encoder: Processes input sequences using stacked self-attention and feed-forward layers.   
+        Decoder: Generates output sequences using self-attention, encoder-decoder attention, and feed-forward layers.   
+
+
 * Improved Efficiency – Unlike RNNs, which process sequences sequentially, Transformers use parallelization, leading to faster training and better scalability.   
-* Breakthrough in NLP – The Transformer significantly outperforms previous models in machine translation and becomes the foundation for models like BERT, GPT, and T5.     
+
+
+
+* Breakthrough in NLP – The Transformer significantly outperforms previous models in machine translation and becomes the foundation for models like BERT, GPT, and T5. 
 ---
 # Project
 
@@ -98,20 +111,22 @@ The `evaluate` function calculates model accuracy on the test set.
 
 ## ⚛️ Training and Evaluation Results
 
+### -1-
 The loss progression over epochs during training:
 
-```plaintext
-Epoch 1/10, Loss: 1.9380
-Epoch 2/10, Loss: 1.2769
-Epoch 3/10, Loss: 1.0876
-Epoch 4/10, Loss: 0.9995
-Epoch 5/10, Loss: 0.9530
-Epoch 6/10, Loss: 0.8923
-Epoch 7/10, Loss: 0.8470
-Epoch 8/10, Loss: 0.8180
-Epoch 9/10, Loss: 0.7867
-Epoch 10/10, Loss: 0.7556
-```
+| Epoch | Loss |
+|--------|--------|
+| 1 | 1.9380 |
+| 2 | 1.2769 |
+| 3 | 1.0876 |
+| 4 | 0.9995 |
+| 5 | 0.9530 |
+| 6 | 0.8923 |
+| 7 | 0.8470 |
+| 8 | 0.8180 |
+| 9 | 0.7867 |
+| 10 | 0.7556 |
+
 
 Final evaluation accuracy on the test set:
 ```plaintext
@@ -119,3 +134,56 @@ Test Accuracy: 80.36%
 ```
 
 This result demonstrates the effectiveness of the Transformer-based model for speech command recognition on the Speech Commands dataset.
+
+### -2-
+
+*Changes to improve voice classification performance*
+
+- Added Positional Encoding
+- Improved evaluation function
+- Separated learning and evaluation functions
+- Added data sample visualization
+- Added learning and evaluation result visualization
+- Added and imported required libraries
+
+![Visualize data set](./outputs/image.png)
+
+| Epoch | Precision (%) | Recall (%) | F1-score (%) |
+|--------|------------|------------|------------|
+| 1 | 60.77 | 54.85 | 55.74 |
+| 2 | 68.35 | 61.61 | 62.10 |
+| 3 | 73.23 | 67.34 | 67.75 |
+| 4 | 72.70 | 67.84 | 69.04 |
+| 5 | 74.53 | 71.92 | 72.34 |
+| 6 | 85.07 | 84.18 | 84.48 |
+| 7 | 87.19 | 85.69 | 86.27 |
+| 8 | 87.42 | 86.86 | 87.09 |
+| 9 | 88.43 | 87.19 | 87.65 |
+| 10 | 89.86 | 88.77 | 89.24 |
+
+![Visualize measure](./outputs/image2.png)
+
+#### **1️⃣ Training Performance Analysis**
+
+#### ✅ Loss Reduction Trend
+- **Initial Loss**: **2.0199** → **Final Loss**: **0.4126**
+- The loss decreases rapidly in the first few epochs and stabilizes after **Epoch 6**.
+- **Significant drop from Epoch 1 to Epoch 6**, indicating fast convergence.
+- The continuous decrease in loss suggests effective learning.
+
+#### ✅ Accuracy Improvement Trend
+- **Initial Accuracy**: **58.16%** → **Final Accuracy**: **90.01%**
+- Accuracy shows **steady growth**, reaching over **85% by Epoch 6**.
+- **Slower increase after Epoch 6**, indicating near-convergence.
+
+**➡ The model is learning effectively, with loss decreasing and accuracy improving consistently.**
+
+
+- **Precision, Recall, and F1-score improve consistently throughout training.**
+- **Early epochs show a large gap between Precision and Recall, but the gap narrows after Epoch 6.**
+- **All metrics surpass 85% after Epoch 6, indicating strong performance and model generalization.**
+
+
+✅ **The model successfully converges after Epoch 6, achieving high performance across all metrics.**  
+✅ **Loss reduction and accuracy improvement indicate effective learning and training stability.**  
+✅ **Precision, Recall, and F1-score remain balanced, suggesting that the model does not overly favor one aspect of evaluation.**  
