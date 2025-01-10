@@ -1,31 +1,57 @@
-# 🗞️ attention is all you need - Review
+# 🗞️ attention is all you need
 [Attention is all you need](https://arxiv.org/abs/1706.03762)
 
 *"Attention Is All You Need"* (2017) introduces the Transformer model, a neural network architecture that replaces recurrent layers with self-attention mechanisms, significantly improving performance in natural language processing (NLP) tasks.   
 
-* **Self-Attention Mechanism** – The model processes input sequences in parallel, using scaled dot-product attention to capture dependencies across words regardless of their distance.
+* `Self-Attention Mechanism` – The model processes input sequences in parallel, using scaled dot-product attention to capture dependencies across words regardless of their distance.
 
+* `Multi-Head Attention` – Multiple attention mechanisms run in parallel, allowing the model to focus on different parts of the input simultaneously.   
 
-* **Multi-Head Attention** – Multiple attention mechanisms run in parallel, allowing the model to focus on different parts of the input simultaneously.   
+* `Positional Encoding` – Since Transformers lack recurrence, they use positional encodings to maintain word order information.   
 
+- Positional Encoding (PE) consists of fixed values added to the input embeddings,  
+calculated using sine and cosine functions for each position.
 
+$$
+PE_{(pos, 2i)} = \sin\left(\frac{pos}{10000^{\frac{2i}{d_{model}}}}\right)
+$$
 
-* **Positional Encoding** – Since Transformers lack recurrence, they use positional encodings to maintain word order information.   
+$$
+PE_{(pos, 2i+1)} = \cos\left(\frac{pos}{10000^{\frac{2i}{d_{model}}}}\right)
+$$
 
+**Explanation of Variables**
+| Variable | Description |
+|----------|------------|
+| \(pos\) | Position of the token in the sequence |
+| \(i\) | Index of the embedding dimension |
+| \(d_{model}\) | Total embedding dimension size |
+| \(10000\) | Scaling factor to normalize position values |
 
+```py
+# PyTorch
+def positional_encoding(max_len, d_model):
+    pe = torch.zeros(max_len, d_model)
+    position = torch.arange(0, max_len, dtype=torch.float32).unsqueeze(1)
+    div_term = torch.exp(torch.arange(0, d_model, 2, dtype=torch.float32) * (-np.log(10000.0) / d_model))
+    
+    pe[:, 0::2] = torch.sin(position * div_term)  # 짝수 인덱스 (sin)
+    pe[:, 1::2] = torch.cos(position * div_term)  # 홀수 인덱스 (cos)
+    
+    return pe
+```
 
-* **Encoder-Decoder Structure** – 
+* Encoder-Decoder Structure – 
     The model consists of:   
-        Encoder: Processes input sequences using stacked self-attention and feed-forward layers.   
-        Decoder: Generates output sequences using self-attention, encoder-decoder attention, and feed-forward layers.   
+        Encoder: Processes input sequences using stacked `self-attention` and `feed-forward layers`.   
+        Decoder: Generates output sequences using `self-attention`, `encoder-decoder attention`, and `feed-forward layers`.   
 
+* Improved Efficiency – Unlike RNNs, which process sequences sequentially, Transformers use parallelization, leading to faster training and better scalability.   
 
-* **Improved Efficiency** – Unlike RNNs, which process sequences sequentially, Transformers use parallelization, leading to faster training and better scalability.   
+![Transformer-model architecture](./outputs/encoderdecoder.png)
 
-
-
-* **Breakthrough in NLP** – The Transformer significantly outperforms previous models in machine translation and becomes the foundation for models like BERT, GPT, and T5. 
 ---
+
 # Project
 
 ## 📊 Speech Command Recognition with Transformer
