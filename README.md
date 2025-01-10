@@ -5,6 +5,10 @@
 
 * `Self-Attention Mechanism` – The model processes input sequences in parallel, using scaled dot-product attention to capture dependencies across words regardless of their distance.
 
+$$
+\text{Attention}(Q, K, V) = \text{softmax} \left(\frac{QK^T}{\sqrt{d_k}}\right) V
+$$
+
 * `Multi-Head Attention` – Multiple attention mechanisms run in parallel, allowing the model to focus on different parts of the input simultaneously.   
 
 * `Positional Encoding` – Since Transformers lack recurrence, they use positional encodings to maintain word order information.   
@@ -55,6 +59,8 @@ def positional_encoding(max_len, d_model):
 # Project
 
 ## 📊 Speech Command Recognition with Transformer
+
+**This project uses only the encoder of the transformer to classify speech command.**
 
 This repository provides an example implementation of a Transformer-based speech command recognition model using PyTorch and torchaudio. It covers the complete pipeline to download, preprocess the Speech Commands dataset, train a Transformer model, and evaluate its performance.
 
