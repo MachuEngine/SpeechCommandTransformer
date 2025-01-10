@@ -1,5 +1,9 @@
-# 🗞️ attention is all you need
-[Attention is all you need](https://arxiv.org/abs/1706.03762)
+## 목차
+1. [Analysis](#Analysis)
+2. [Project](#Project)
+
+# Analysis
+[Analysis of Attention is all you need](https://arxiv.org/abs/1706.03762)
 
 *"Attention Is All You Need"* (2017) introduces the Transformer model, a neural network architecture that replaces recurrent layers with self-attention mechanisms, significantly improving performance in natural language processing (NLP) tasks.   
 
