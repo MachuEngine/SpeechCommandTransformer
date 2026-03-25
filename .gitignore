@@ -4,3 +4,4 @@
 venv/
 mlruns/
 data/
+/data_raw
