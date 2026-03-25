@@ -1,0 +1,17 @@
+# Virtual envs
+venv/
+
+# Large data not needed for serving
+data/
+
+# DVC/Git metadata (don't send to Docker build context)
+.git/
+.dvc/
+
+# Hidden misc
+.DS_Store
+
+# Python cache
+__pycache__/
+*.pyc
+
