@@ -37,7 +37,7 @@ _mel_transform = T.MelSpectrogram(sample_rate=INPUT_SAMPLE_RATE, n_mels=N_MELS)
 def _startup() -> None:
     global _model
     try:
-        # 복잡한 경로 탐색 안녕! 직관적으로 my_model 폴더에서 바로 불러옵니다.
+        # my_model 폴더에서 바로 불러옵니다.
         _model = mlflow.pytorch.load_model("./my_model", map_location=device)
         _model.eval()
         _model.to(device)
