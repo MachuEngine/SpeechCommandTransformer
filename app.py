@@ -28,7 +28,7 @@ SPEECHCOMMANDS_LABELS = sorted(
 
 app = FastAPI(title="Speech Command Transformer - Serving")
 
-BUCKET_NAME = "jongmin-stt-model-store" 
+BUCKET_NAME = "machu-stt-model-store-20260401-created" 
 S3_FOLDER_PREFIX = "my_model/" # S3에 업로드된 파일의 정확한 이름
 LOCAL_DIR = "./my_model"
 
