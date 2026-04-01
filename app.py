@@ -29,8 +29,8 @@ SPEECHCOMMANDS_LABELS = sorted(
 app = FastAPI(title="Speech Command Transformer - Serving")
 
 BUCKET_NAME = "jongmin-stt-model-store" 
-S3_MODEL_KEY = "my_model" # S3에 업로드된 파일의 정확한 이름
-LOCAL_MODEL_PATH = "./my_model"
+S3_FOLDER_PREFIX = "my_model/" # S3에 업로드된 파일의 정확한 이름
+LOCAL_DIR = "./my_model"
 
 def download_model_folder_from_s3():
     # 로컬에 my_model 폴더가 없다면 새로 만들고 다운로드 시작
@@ -73,6 +73,9 @@ _mel_transform = T.MelSpectrogram(sample_rate=INPUT_SAMPLE_RATE, n_mels=N_MELS)
 @app.on_event("startup")
 def _startup() -> None:
     global _model
+
+    download_model_folder_from_s3()
+    
     try:
         # my_model 폴더에서 바로 불러옵니다.
         _model = mlflow.pytorch.load_model("./my_model", map_location=device)
