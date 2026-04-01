@@ -6,3 +6,4 @@ mlruns/
 data/
 /data_raw
 my_model/
+.env
