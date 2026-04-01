@@ -1,4 +1,5 @@
 import os
+import boto3
 import tempfile
 from typing import Optional
 
@@ -27,11 +28,47 @@ SPEECHCOMMANDS_LABELS = sorted(
 
 app = FastAPI(title="Speech Command Transformer - Serving")
 
+BUCKET_NAME = "jongmin-stt-model-store" 
+S3_MODEL_KEY = "my_model" # S3에 업로드된 파일의 정확한 이름
+LOCAL_MODEL_PATH = "./my_model"
+
+def download_model_folder_from_s3():
+    # 로컬에 my_model 폴더가 없다면 새로 만들고 다운로드 시작
+    if not os.path.exists(LOCAL_DIR) or not os.listdir(LOCAL_DIR):
+        print(f"모델 파일이 없습니다. S3({BUCKET_NAME})에서 폴더 다운로드를 시작합니다...")
+        os.makedirs(LOCAL_DIR, exist_ok=True)
+        
+        s3_client = boto3.client('s3', region_name='ap-northeast-2')
+        # 해당 폴더(Prefix) 안에 있는 모든 파일 목록 가져오기
+        objects = s3_client.list_objects_v2(Bucket=BUCKET_NAME, Prefix=S3_FOLDER_PREFIX)
+        
+        if 'Contents' in objects:
+            for obj in objects['Contents']:
+                s3_key = obj['Key']
+                
+                # S3의 경로가 폴더 자체(이름이 /로 끝남)면 다운로드 건너뛰기
+                if s3_key.endswith('/'): 
+                    continue
+                
+                # 로컬에 저장할 최종 경로 만들기 (예: ./my_model/model.pth)
+                local_file_path = os.path.join(".", s3_key)
+                
+                # 파일이 들어갈 하위 폴더가 로컬에 없다면 미리 생성
+                os.makedirs(os.path.dirname(local_file_path), exist_ok=True)
+                
+                print(f"다운로드 중: {s3_key}")
+                s3_client.download_file(BUCKET_NAME, s3_key, local_file_path)
+                
+            print("✨ 모델 폴더 다운로드 완벽하게 완료!")
+        else:
+            print("⚠️ S3에 다운로드할 파일이 없습니다. 버킷 이름과 폴더명을 확인해주세요.")
+    else:
+        print("✅ 로컬에 이미 모델이 존재합니다.")
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 _model: Optional[torch.nn.Module] = None
 
 _mel_transform = T.MelSpectrogram(sample_rate=INPUT_SAMPLE_RATE, n_mels=N_MELS)
-
 
 @app.on_event("startup")
 def _startup() -> None:

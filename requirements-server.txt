@@ -9,4 +9,5 @@ soundfile==0.13.0
 
 # FastAPI의 UploadFile(File(...)) 사용을 위한 의존성
 python-multipart==0.0.20
+boto3==1.34.0
 
